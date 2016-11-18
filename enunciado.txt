@@ -1,0 +1,60 @@
+actividad 0029
+
+Vamos a interactuar con un proyecto ya hecho para simular el escenario del 
+correo electrónico descrito en los vídeos anteriores:
+
+1.Clona de mi página de GitHub el repositorio mail-system. ¡¡No mires el código
+ del proyecto en esta actividad!!
+
+2.Ábrelo con BlueJ a través de la opción "File > Open non BlueJ".
+
+3.Crea un objeto MailServer y dale un nombre al objeto.
+
+4.Crea un par de objetos MailClient con los nombres de usuario que quieras y 
+como servidor especifica el nombre del objeto creado en el punto anterior.
+
+5.Crea, desde el cliente de correo del primer usuario, un mensaje para el
+ segundo usuario y envíalo.
+
+6.En el cliente del segundo usuario, invoca el método que descarga e imprime
+ por pantalla el siguiente mensaje de ese usuario sin descargar del servidor.
+
+7.Repite el paso anterior.
+
+8.Ahora repite los pasos 5 y 6 pero en sentido contrario.
+
+
+
+
+actividad 0889
+
+Utilizando una combinación de lectura detallada de código, ejecución mental y 
+real de métodos y uso del debugger intenta entender el código y el 
+funcionamiento de las clases MailItem y MailClient.
+
+Ten en cuenta que aún no tenemos los conocimientos necesarios para entender
+ la clase MailServer: si quieres mirar el código, adelante, pero probablemente
+ no entiendas mucho. Sin embargo, si que puedes mirar las cabeceras de los
+ métodos de la clase MailServer y los comentarios de dichos métodos previos a 
+la cabecera, lo que te hará tener una idea global del funcionamiento de 
+la clase aunque no mires el código del interior de los métodos.
+
+
+actividad 0031
+
+Modifica el código del proyecto del simulador de email para que los nombres de 
+los parámetros de los constructores de MailItem y de MailClient coincidan con 
+los nombres de los atributos de dichas clases.
+
+Haz un commit con los cambios.
+
+Ahora añade un atributo subject (asunto) a la clase MailItem. Haz las 
+modificaciones necesarias en la clase MailClient para poder crear y enviar 
+emails con asunto. Asegúrate que, cuando se muestran los email por pantalla, 
+se muestre también el asunto del email.
+
+Haz un nuevo commit con los cambios, sube el proyecto a Github e indica como 
+respuesta a esta actividad la URL de ese ultimo commit.
+
+
+
