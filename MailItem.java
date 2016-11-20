@@ -15,6 +15,8 @@ public class MailItem
     private String message;
     
     private String subject;
+    
+    private int contador = 0;
 
     /**
      * Create a mail item from sender to the given recipient,
@@ -29,6 +31,7 @@ public class MailItem
         this.to = to;
         this.subject = subject;
         this.message = message;
+        contador = contador +1;
     }
 
     /**
@@ -73,4 +76,8 @@ public class MailItem
         System.out.println("To: " + to);
         System.out.println("Message: " + message);
     }
+    
+    public int mensajesNoLeidos(){
+        return contador;
+    } 
 }

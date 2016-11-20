@@ -11,7 +11,8 @@ public class MailClient
     private MailServer server;
     // The user running this client.
     private String user;
-
+    
+    private int contador;
     /**
      * Create a mail client run by user and attached to the given server.
      */
@@ -19,6 +20,7 @@ public class MailClient
     {
         this.server = server;
         this.user = user;
+        contador = 0;
     }
 
     /**
@@ -54,5 +56,11 @@ public class MailClient
     {
         MailItem item = new MailItem(user, to, subject, message);
         server.post(item);
+    }
+    
+    public String getMensajesNoLeidos(){
+        contador = server.howManyMailItems(user);
+        
+        return contador + " Mensajes no leidos.";
     }
 }
