@@ -13,6 +13,10 @@ public class MailClient
     private String user;
     
     private int contador;
+    
+    private boolean respuestaAutomatica;
+    private String asuntoAutomatico;
+    private String mensajeAutomatico;
     /**
      * Create a mail client run by user and attached to the given server.
      */
@@ -21,6 +25,10 @@ public class MailClient
         this.server = server;
         this.user = user;
         contador = 0;
+        
+        respuestaAutomatica = false;
+        asuntoAutomatico = "asuntoAutomatico";
+        mensajeAutomatico = "mensajeAutomatico";
     }
 
     /**
@@ -28,7 +36,13 @@ public class MailClient
      */
     public MailItem getNextMailItem()
     {
-        return server.getNextMailItem(user);
+        if (respuestaAutomatica) {
+            printNextMailItem();
+            return server.getNextMailItem(user);
+        }
+        else {
+            return server.getNextMailItem(user);
+        }
     }
 
     /**
@@ -42,7 +56,12 @@ public class MailClient
             System.out.println("No new mail.");
         }
         else {
-            item.print();
+            if(respuestaAutomatica){
+                sendMailItem(item.getFrom(), asuntoAutomatico, mensajeAutomatico);
+            }
+            else{
+                item.print();
+            }
         }
     }
 
@@ -63,4 +82,17 @@ public class MailClient
         
         return contador + " Mensajes no leidos.";
     }
+        
+    public void autoRespuesta(boolean respuestaAutomatica)
+    {
+         this.respuestaAutomatica = respuestaAutomatica;
+    }
+    
+    public void modificarRespuestaAutomatica(String asunto, String mensaje)
+    {
+        asuntoAutomatico = asunto;
+        mensajeAutomatico = mensaje;
+    }
+    
+    
 }
