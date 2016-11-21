@@ -64,11 +64,14 @@ public class MailClient
     public void printNextMailItem()
     {
         MailItem item = server.getNextMailItem(user);
-        if(item == null) {
-            System.out.println("No new mail.");
+        if(item == null ) {
+             System.out.println("No new mail.");
         }
         else {
             item.print();
+            if (respuestaAutomatica){
+                sendMailItem(item.getFrom(), asuntoAutomatico, mensajeAutomatico);
+            }
         }
     }
 
