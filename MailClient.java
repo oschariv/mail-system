@@ -12,8 +12,6 @@ public class MailClient
     // The user running this client.
     private String user;
     
-    private int contador;
-    
     private boolean respuestaAutomatica;
     private String asuntoAutomatico;
     private String mensajeAutomatico;
@@ -24,7 +22,6 @@ public class MailClient
     {
         this.server = server;
         this.user = user;
-        contador = 0;
         
         respuestaAutomatica = false;
         asuntoAutomatico = "asuntoAutomatico";
@@ -77,10 +74,8 @@ public class MailClient
         server.post(item);
     }
     
-    public String getMensajesNoLeidos(){
-        contador = server.howManyMailItems(user);
-        
-        return contador + " Mensajes no leidos.";
+    public void getMensajesNoLeidos(){
+        System.out.println(user + ": " + server.howManyMailItems(user) + " Mensajes no leidos.");
     }
         
     public void autoRespuesta(boolean respuestaAutomatica)
