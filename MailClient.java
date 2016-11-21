@@ -96,9 +96,9 @@ public class MailClient
     /**
      * Habilita o no la respuesta automatica
        */    
-    public void autoRespuesta(boolean respuestaAutomatica)
+    public void autoRespuesta()
     {
-         this.respuestaAutomatica = respuestaAutomatica;
+         respuestaAutomatica = !respuestaAutomatica;
     }
     
     /**
