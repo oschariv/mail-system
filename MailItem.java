@@ -3,7 +3,7 @@
  * addresses and a message string.
  * 
  * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @version 2016.11.20 (@revisionAuthor oschariv)
  */
 public class MailItem
 {
@@ -69,8 +69,8 @@ public class MailItem
     public void print()
     {
         System.out.println("From: " + from);
-        System.out.println("Subject: " + subject);
         System.out.println("To: " + to);
+        System.out.println("Subject: " + subject);
         System.out.println("Message: " + message);
     }
 }

@@ -3,7 +3,7 @@
  * particular user, and sends and retrieves mail via a particular server.
  * 
  * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @version 2016.11.21 (@revisionAuthor oschariv)
  */
 public class MailClient
 {
@@ -11,9 +11,11 @@ public class MailClient
     private MailServer server;
     // The user running this client.
     private String user;
-    
+    //Si es true se activa la respuesta automatica.
     private boolean respuestaAutomatica;
+    //Variable para guardar el asunto automatico.
     private String asuntoAutomatico;
+    //Variable para guardar el mensaje automatico.
     private String mensajeAutomatico;
     /**
      * Create a mail client run by user and attached to the given server.
@@ -22,8 +24,9 @@ public class MailClient
     {
         this.server = server;
         this.user = user;
-        
+        //La respuesta automatica se inicia desactivada.
         respuestaAutomatica = false;
+        // Iniciamos las varibles de la respuesta automatica.
         asuntoAutomatico = "asuntoAutomatico";
         mensajeAutomatico = "mensajeAutomatico";
     }
@@ -33,13 +36,25 @@ public class MailClient
      */
     public MailItem getNextMailItem()
     {
-        if (respuestaAutomatica) {
-            printNextMailItem();
-            return server.getNextMailItem(user);
+        //Recibimos algo del servidor.
+        MailItem item = server.getNextMailItem(user);
+        //Si lo que recibimos es un email y la respuesta automatica esta activada...
+        if (item != null && respuestaAutomatica) {          
+            //Enviamos un correo de respuesta automaticamente
+            
+            //Forma ampliada.
+            //Creamos el email
+            //MailItem email = new MailItem(user, item.getFrom(), asuntoAutomatico, 
+                                          //mensajeAutomatico);
+            //Enviamos el email.
+            //server.post(email);
+            
+            //Forma reducida(dejamos funcionando esta porque es mas sencilla).
+            //Usamos el metodo sendMailItem.
+            sendMailItem(item.getFrom(), asuntoAutomatico, mensajeAutomatico);
         }
-        else {
-            return server.getNextMailItem(user);
-        }
+        //Devolvemos lo recibido por el servidor.
+        return item;
     }
 
     /**
@@ -53,12 +68,7 @@ public class MailClient
             System.out.println("No new mail.");
         }
         else {
-            if(respuestaAutomatica){
-                sendMailItem(item.getFrom(), asuntoAutomatico, mensajeAutomatico);
-            }
-            else{
-                item.print();
-            }
+            item.print();
         }
     }
 
@@ -74,20 +84,31 @@ public class MailClient
         server.post(item);
     }
     
+    /**
+     * Devuelve el numero de mensajes no leidos que hay en el servidor sin 
+     * descargarlos.
+       */
     public void getMensajesNoLeidos(){
-        System.out.println(user + ": " + server.howManyMailItems(user) + " Mensajes no leidos.");
+        System.out.println(user + ": " + server.howManyMailItems(user) 
+                            + " Mensajes no leidos.");
     }
-        
+    
+    /**
+     * Habilita o no la respuesta automatica
+       */    
     public void autoRespuesta(boolean respuestaAutomatica)
     {
          this.respuestaAutomatica = respuestaAutomatica;
     }
     
+    /**
+     * Permite modificar el asunto y el mensaje que lleva la respuesta
+     * automatica.
+       */
     public void modificarRespuestaAutomatica(String asunto, String mensaje)
     {
         asuntoAutomatico = asunto;
         mensajeAutomatico = mensaje;
     }
-    
-    
+        
 }
