@@ -17,6 +17,8 @@ public class MailClient
     private String asuntoAutomatico;
     //Variable para guardar el mensaje automatico.
     private String mensajeAutomatico;
+    //Atributo MailItem para guardar el ultimo mensaje recibido.
+    private MailItem saveLastItem;
     /**
      * Create a mail client run by user and attached to the given server.
      */
@@ -29,6 +31,7 @@ public class MailClient
         // Iniciamos las varibles de la respuesta automatica.
         asuntoAutomatico = "asuntoAutomatico";
         mensajeAutomatico = "mensajeAutomatico";
+        saveLastItem = null;
     }
 
     /**
@@ -38,6 +41,10 @@ public class MailClient
     {
         //Recibimos algo del servidor.
         MailItem item = server.getNextMailItem(user);
+        if (item != null)
+        {
+            saveLastItem = item;
+        }
         //Si lo que recibimos es un email y la respuesta automatica esta activada...
         if (item != null && respuestaAutomatica) {          
             //Enviamos un correo de respuesta automaticamente
@@ -50,7 +57,7 @@ public class MailClient
             //server.post(email);
             
             //Forma reducida(dejamos funcionando esta porque es mas sencilla).
-            //Usamos el metodo sendMailItem.
+            //Usamos el metodo sendMailItem.            
             sendMailItem(item.getFrom(), asuntoAutomatico, mensajeAutomatico);
         }
         //Devolvemos lo recibido por el servidor.
@@ -65,7 +72,7 @@ public class MailClient
     {
         MailItem item = getNextMailItem();
         if(item == null ) {
-             System.out.println("No new mail.");
+            System.out.println("No new mail.");
         }
         else {
             item.print();
@@ -110,5 +117,19 @@ public class MailClient
         asuntoAutomatico = asunto;
         mensajeAutomatico = mensaje;
     }
-        
+    
+    /**
+     * Metodo que permite visualizar tantas veces como queramos el "ULTIMO MENSAJE
+     * RECIBIDO" y si no se ha recibido ningun mensaje se informa por pantalla de
+     * ello.
+       */
+    public void printLastMail()
+    {
+        if(saveLastItem == null ) {
+             System.out.println("No last mail.");
+        }
+        else {
+            saveLastItem.print();
+        }
+    }
 }
